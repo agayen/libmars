@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(libmars CXX)
+project(libmars_addon CXX)
 
 include(bare)
-add_bare_module(libmars)
+add_bare_module(libmars_addon)
 
 # Dependencies
 find_package(PkgConfig REQUIRED)
@@ -19,7 +19,7 @@ pkg_check_modules(GLIB REQUIRED glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})
 
 # Source files
-set(files
+set(gstreamerFiles
   src/callback-sink.c
   src/callback-sink.h
   src/chunker.c
@@ -27,10 +27,10 @@ set(files
 )
 
 target_sources(
-  ${libmars}
+  ${libmars_addon}
   PRIVATE
-    ${files}
+    ${gstreamerFiles}
     src/binding.cpp
 )
 
-target_link_libraries(${libmars} PRIVATE ${GLIB_LDFLAGS})
+target_link_libraries(${libmars_addon} PRIVATE ${GLIB_LDFLAGS})
