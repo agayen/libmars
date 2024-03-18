@@ -9,6 +9,7 @@
 static char *input = MARS_CHUNKER_INPUT_MIC;
 static char *output = NULL;
 static char *muxer = NULL;
+static int *silence_th = NULL;
 
 static GOptionEntry entries[] =
 {
@@ -19,6 +20,8 @@ static GOptionEntry entries[] =
     "The output format for chunks like \"output/%02d.wav\"", "O" },
   { "muxer", 'm', G_OPTION_FLAG_NONE, G_OPTION_ARG_STRING, &muxer,
     "The muxer to encode chunks like \"wavenc\"", "M"},
+  { "silence_th", 's', G_OPTION_FLAG_NONE, G_OPTION_ARG_INT, &silence_th,
+    "silence threshold to get chunks \"-60\"", "S"},
   G_OPTION_ENTRY_NULL,
 };
 
@@ -51,8 +54,10 @@ main (int argc, char **argv)
                           "output", output,
                           "muxer", muxer,
                           "rate", 8000,
-                          "maximum-chunk-time", 2 * GST_SECOND,
+                          "maximum-chunk-time", 8 * GST_SECOND,
+                          "silence-threshold",  silence_th, //-45 the best
                           NULL);
+
   mars_chunker_play (chunker);
 
   if (g_strcmp0 (input, MARS_CHUNKER_INPUT_MIC) == 0) {

@@ -62,7 +62,8 @@ main (int argc, char **argv)
                           "sink", sink,
                           "muxer", muxer,
                           "rate", 8000,
-                          "maximum-chunk-time", 2 * GST_SECOND,
+                          "maximum-chunk-time", 4 * GST_SECOND,
+                          "silence-threshold",  -45, //-45 the best
                           NULL);
 
   mars_chunker_play (chunker);

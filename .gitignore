@@ -55,3 +55,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+#bare ignore
+node_modules
+build
+prebuild
+output
+_build
+package-lock.json
+.vscode
